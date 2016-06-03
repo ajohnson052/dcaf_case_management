@@ -38,9 +38,9 @@ class LoggingCallsTest < ActionDispatch::IntegrationTest
     it 'should be viewable on the call log' do
       click_link 'Call Log'
       last_call = @pregnancy.reload.calls.last
-
+      
       within :css, '#call_log' do
-        assert has_text? last_call.created_at.localtime.strftime('%-m/%d')
+        assert has_text? last_call.created_at.localtime.strftime('%-m/%-d')
         assert has_text? last_call.created_at.localtime.strftime('%-l:%M %P')
         assert has_text? 'Reached patient'
         assert has_text? last_call.created_by.name
@@ -86,7 +86,7 @@ class LoggingCallsTest < ActionDispatch::IntegrationTest
         last_call = @pregnancy.reload.calls.last
 
         within :css, '#call_log' do
-          assert has_text? last_call.created_at.localtime.strftime('%-m/%d')
+          assert has_text? last_call.created_at.localtime.strftime('%-m/%-d')
           assert has_text? last_call.created_at.localtime.strftime('%-l:%M %P')
           assert has_text? call_status
           assert has_text? last_call.created_by.name
